@@ -20,7 +20,6 @@ phone_pattern = re.compile(
     r'(\+7\s?|8\s?|7\s?)?\(?\-?\d{3,}\s?\d*\)?\s?\-?\d*\-?\s?\d*\-?\d*\s?\d*\s?\d*')
 
 
-
 # Нормализация телефонов
 def normalizePhone(phone):
     phone = re.sub(r'[^\d]', '', phone)
@@ -70,10 +69,8 @@ for input_file in inputDirectory.glob('*.csv'):
             # Формирование словаря E-email
             if len(emails_list) > 0:
                 emails = {}
-                i = 0
-                for email in sorted(set(emails_list)):
-                    i += 1
-                    key = 'email' + str(i)
+                for count, email in enumerate(sorted(set(emails_list)), start=1):
+                    key = 'email' + str(count)
                     emails.update({key: email})
                     # Добавление заголовка если такого ещё нет
                     if not key in email_headers:
@@ -83,10 +80,8 @@ for input_file in inputDirectory.glob('*.csv'):
             # Формирование словаря телефонов
             if len(phones_list) > 0:
                 phones = {}
-                i = 0
-                for phone in sorted(set(phones_list)):
-                    i += 1
-                    key = 'phone' + str(i)
+                for count, phone in enumerate(sorted(set(phones_list)), start=1):
+                    key = 'phone' + str(count)
                     phones.update({key: phone})
                     # Добавление заголовка если такого ещё нет
                     if not key in phone_headers:
